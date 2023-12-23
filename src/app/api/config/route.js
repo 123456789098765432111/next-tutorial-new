@@ -11,6 +11,6 @@ export const GET = async () => {
       NextResponse.json({ error: 'Internal Server Error' },{status:500});
     }
   } else {
-    NextResponse.end(); // Return method not allowed for other methods
+    NextResponse.json({ message:"Not Allowed" },{status:403}); // Return method not allowed for other methods
   }
 };
