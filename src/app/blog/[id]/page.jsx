@@ -4,15 +4,20 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 
 async function getData(id) {
-  const res = await fetch(`https://api.example.com/posts/${id}`, {
-    cache: "no-store",
-  });
+  try {
+    const res = await fetch(`https://api.example.com/posts/${id}`, {
+      cache: "no-store",
+    });
 
-  if (!res.ok) {
-    return notFound()
+    if (!res.ok) {
+      return notFound(); // Assuming notFound() is a valid handler for 404 cases
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    throw new Error('Failed to fetch data. Please try again later.');
   }
-
-  return res.json();
 }
 
 
