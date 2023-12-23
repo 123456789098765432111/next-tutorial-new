@@ -13,25 +13,25 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch('/api/send-email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
+    // try {
+    //   const response = await fetch('/api/send-email', {
+    //     method: 'POST',
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //     },
+    //     body: JSON.stringify(formData),
+    //   });
 
-      if (response.ok) {
-        console.log('Email sent successfully!');
-        // Optionally reset form after successful submission
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        console.error('Failed to send email.');
-      }
-    } catch (error) {
-      console.error('Error sending email:', error);
-    }
+    //   if (response.ok) {
+    //     console.log('Email sent successfully!');
+    //     // Optionally reset form after successful submission
+    //     setFormData({ name: '', email: '', message: '' });
+    //   } else {
+    //     console.error('Failed to send email.');
+    //   }
+    // } catch (error) {
+    //   console.error('Error sending email:', error);
+    // }
   };
 
   const handleChange = (e) => {
