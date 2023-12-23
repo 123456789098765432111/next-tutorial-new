@@ -131,7 +131,7 @@ const Dashboard = () => {
   
                   <div className={styles.post} key={post._id}>
                     <div className={styles.imgContainer}>
-                      <img src={post.img} alt="" width={200} height={100} />
+                      <Image src={post.img} alt="" width={200} height={100} />
                     </div>
                     <h2 className={styles.postTitle}>{post.title}</h2>
                     <span
