@@ -6,9 +6,25 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import useSWR from "swr";
+import axios from "axios";
 require('dotenv').config();
 const Dashboard = () => {
   const [email, setEmail] = useState('');
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get('/api/auth/register');
+        setUsers(response.data);
+      } catch (error) {
+        console.error('Error fetching users: ', error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+  console.log(users);
         //OLD WAY TO FETCH DATA
         // const [data, setData] = useState([]);
         // const [err, setErr] = useState(false);
@@ -45,11 +61,10 @@ const Dashboard = () => {
   
     fetchData();
   }, []);
-  console.log(email);
   const session = useSession();
 
   const router = useRouter();
-  
+
   //NEW WAY TO FETCH DATA
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -101,16 +116,18 @@ const Dashboard = () => {
     }
   };
 
+
   if (session.status === "authenticated") {
     if (session.data.user.email === "shamshodnurmurodov119@gmail.com") {    
       return (
+       <>
         <div className={styles.container}>
-          <div   className={styles.posts}  >
+          <div   className={styles.posts} style={{overflowY:"auto",height:"500px",padding:"30px"}} >
             {isLoading
               ? "loading"
               : data?.map((post) => (
                  <>
-                  <div >
+                  <div key={post._id}>
   
                   <div className={styles.post} key={post._id}>
                     <div className={styles.imgContainer}>
@@ -143,6 +160,14 @@ const Dashboard = () => {
             <button className={styles.button}>Send</button>
           </form>
         </div>
+        <div className={styles.container}>
+                <div  className={styles.posts}>
+                  {
+                    console.log(session.data)
+                  }
+                </div>
+        </div>
+       </>
       );
     }else{
       router.push('/'); // Redirect to the home page

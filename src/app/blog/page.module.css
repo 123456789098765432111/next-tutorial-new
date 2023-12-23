@@ -1,8 +1,8 @@
 .container {
   display: flex;
   align-items: center;
-  gap: 50px;
-  margin-bottom: 50px;
+  gap: 30px;
+  margin-bottom: 30px;
 }
 
 .image{
@@ -10,6 +10,10 @@
 }
 
 .content {
+  background-color: antiquewhite;
+  width: 100%;
+  padding: 30px;
+  border-radius: 30px;
 }
 
 .title{
