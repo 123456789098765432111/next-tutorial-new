@@ -18,36 +18,35 @@ const handler = NextAuth({
         try {
           const user = await User.findOne({
             email: credentials.email,
-            IsAdmin,
           });
-          
-          if (user) {
-            const isPasswordCorrect = await bcrypt.compare(
-              credentials.password,
-              user.password
-              );
-              
-              if (isPasswordCorrect) {
-                // Check if the provided email matches a specific email
-                const isAdminEmail = credentials.email === process.env.email;
-                
-                // Set isAdmin based on the email condition
-              const isAdmin = isAdminEmail ? true : false;
 
-              // Return user object with modified email and isAdmin
-              return {
-                ...user,
-                email: isAdminEmail ? credentials.email : user.email, // If matches, set provided email, else use existing user email
-                isAdmin: isAdmin,
-              };
-            } else {
-              throw new Error("Wrong Credentials!");
-            }
-          } else {
+          if (!user) {
             throw new Error("User not found!");
           }
+
+          const isPasswordCorrect = await bcrypt.compare(
+            credentials.password,
+            user.password
+          );
+
+          if (!isPasswordCorrect) {
+            throw new Error("Wrong Credentials!");
+          }
+
+          // Check if the provided email matches a specific email
+          const isAdminEmail = credentials.email === process.env.email;
+
+          // Set isAdmin based on the email condition
+          const isAdmin = isAdminEmail ? true : false;
+
+          // Return user object with modified email and isAdmin
+          return {
+            ...user,
+            email: isAdminEmail ? credentials.email : user.email,
+            isAdmin: isAdmin,
+          };
         } catch (err) {
-          throw new Error(err);
+          throw new Error("Authentication failed");
         }
       },
     }),
@@ -65,4 +64,4 @@ const handler = NextAuth({
   },
 });
 
-export { handler as GET, handler as POST };
+export default handler;
