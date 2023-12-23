@@ -47,20 +47,20 @@ const Dashboard = () => {
         //   };
         //   getData()
         // }, []);
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch('/api/config');
-        const data = await res.json();
-        setEmail(data.email);
-      } catch (error) {
-        console.error("Error fetching data: ", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await fetch('/api/config');
+  //       const data = await res.json();
+  //       setEmail(data.email);
+  //     } catch (error) {
+  //       console.error("Error fetching data: ", error);
+  //     }
+  //   };
     
   
-    fetchData();
-  }, []);
+  //   fetchData();
+  // }, []);
   const session = useSession();
 
   const router = useRouter();
