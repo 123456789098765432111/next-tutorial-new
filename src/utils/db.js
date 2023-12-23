@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const connect = async () => {
   try {
-    await mongoose.connect(process.env.MONGO, {
+    await mongoose.connect("mongodb+srv://Umidjon:Umidjon2005@cluster0.3mqkdgy.mongodb.net/Umidjon", {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useFindAndModify: false,
