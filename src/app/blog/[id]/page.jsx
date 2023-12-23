@@ -36,7 +36,7 @@ const BlogPost = async ({ params }) => {
             {data.desc}
           </p>
           <div className={styles.author}>
-            <img
+            <Image
               src={data.img}
               alt=""
               width={40}
@@ -47,7 +47,7 @@ const BlogPost = async ({ params }) => {
           </div>
         </div>
         <div className={styles.imageContainer}>
-          <img
+          <Image
             src={data.img}
             alt=""
             fill={true}
